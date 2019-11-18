@@ -1,8 +1,8 @@
 function replaceSubs(from) {
   return from.
-    replace(/\\th/i, "þ").
-    replace(/\\dh/i, "ð").
-    replace(/\\ae/i, "æ").
+    replace(/\\th/gi, "þ").
+    replace(/\\dh/gi, "ð").
+    replace(/\\ae/gi, "æ").
     replace("Þ", "þ").
     replace("Ð", "ð").
     toLowerCase();
