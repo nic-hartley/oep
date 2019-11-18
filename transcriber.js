@@ -15,5 +15,12 @@ function replaceSubs(from) {
 function transcribe(from) {
   // TODO
   from = replaceSubs(from);
-  return from;
+  let output = "";
+  for (let letter of from) {
+    switch (letter) {
+      default: // anything else is punctuation, whitespace, etc
+        output += letter;
+    }
+  }
+  return output;
 }
