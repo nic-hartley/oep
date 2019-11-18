@@ -31,12 +31,15 @@
       }
       main p {
         text-align: center;
-        padding: 1em 0;
+      }
+      main p.transition {
+        font-size: 14pt;
       }
       main textarea {
         height: 10em;
         font-family: 'Times New Roman', Times, serif;
         font-size: 12pt;
+        margin: 0.5em 0;
       }
       footer {
         color: white;
@@ -66,8 +69,15 @@
       o̞ld ɪŋlɪʃ pɹənʌnsietɹ̩
     </header>
     <main>
+      <p>
+        You can use <code>\th</code> to represent Þ/þ, <code>\dh</code> to represent Ð/ð, and <code>\ae</code> to represent æ.
+      </p>
+      <p>
+        Output is in <a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>.
+        Relevant source is <a href="./transcriber.js">here</a>, if you're curious.
+      </p>
       <textarea id="input" placeholder="Text to transcribe" oninput="update()"></textarea>
-      <p>...is pronounced...</p>
+      <p class="transition">...is pronounced...</p>
       <textarea id="output" disabled="disabled"></textarea>
     </main>
     <footer>
