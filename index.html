@@ -2,8 +2,77 @@
 <html lang="en">
   <head>
     <title>Old English Pronunciator</title>
+    <style>
+      html, body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background-color: darkblue;
+      }
+      body > * {
+        width: 100%;
+        box-sizing: border-box;
+      }
+      header {
+        text-align: center;
+        color: white;
+        font-size: 1.5em;
+        padding: 0.5em;
+      }
+      main {
+        padding: 1em;
+        background-color: white;
+      }
+      main > * {
+        display: block;
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      main p {
+        text-align: center;
+        padding: 1em 0;
+      }
+      main textarea {
+        height: 10em;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 12pt;
+      }
+      footer {
+        color: white;
+        padding: 0.5em;
+        font-size: 10pt;
+      }
+      footer .left {
+        float: left;
+      }
+      footer .right {
+        float: right;
+      }
+    </style>
+    <script src="./transcriber.js"></script>
+    <script>
+      let working = false;
+      function update() {
+        if (working) return;
+        working = true;
+        output.value = transcribe(input.value);
+        working = false;
+      }
+    </script>
   </head>
   <body>
-    TODO
+    <header>
+      o̞ld ɪŋlɪʃ pɹənʌnsietɹ̩
+    </header>
+    <main>
+      <textarea id="input" placeholder="Text to transcribe" oninput="update()"></textarea>
+      <p>...is pronounced...</p>
+      <textarea id="output" disabled="disabled"></textarea>
+    </main>
+    <footer>
+      <span class="left">&copy; 2019 Nic Hartley</span>
+      <span class="right">Made for RIT's ENGL370</span>
+    </footer>
   </body>
 </html>
