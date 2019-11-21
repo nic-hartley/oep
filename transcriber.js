@@ -39,11 +39,12 @@ function singleSub(text, pos) {
   let next = text[pos + 1];
   let prev = text[pos - 1];
   switch (current) {
+    // TODO: Vowels
     case 'c':
       if (next == 'g') return ['dʒ', 2];
       if (is.vowel.front(next) || is.vowel.front(prev)) return ['tʃ', 1];
       if (is.vowel(prev) && is.letter(next)) return ['tʃ', 1];
-      // TODO: "sometimes after 'n' or 'l'"
+      // TODO: "sometimes after 'n' or 'l'" is /tʃ/
       return ['k', 1];
     case 'f':
       // TODO: Investigate positions where this is voiced
@@ -64,6 +65,7 @@ function singleSub(text, pos) {
       return ['ɹ', 1];
     case 's':
       if (next == 'c') return ['ʃ', 2];
+      // TODO: Investigate positions where this is voiced
       return ['s', 1];
     case 'n':
       if (next == 'g') {
