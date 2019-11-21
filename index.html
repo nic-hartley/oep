@@ -23,7 +23,7 @@
       }
       main {
         padding: 1em;
-        background-color: #fff8db;
+        background-color: #fffae4;
       }
       main > * {
         display: block;
@@ -36,12 +36,13 @@
       }
       main p.transition {
         font-size: 14pt;
+        padding: 0.5em 0;
       }
       main textarea {
         height: 10em;
         font-family: 'Times New Roman', Times, serif;
         font-size: 12pt;
-        margin: 0.5em 0;
+        display: block;
       }
       footer {
         color: white;
@@ -57,12 +58,14 @@
     </style>
     <script src="./transcriber.js"></script>
     <script>
-      let working = false;
       function update() {
-        if (working) return;
-        working = true;
-        output.value = transcribe(input.value);
-        working = false;
+        let [val, success] = transcribe(input.value);
+        output.value = val;
+        if (success) {
+          output.style.color = 'initial';
+        } else {
+          output.style.color = 'red';
+        }
       }
     </script>
   </head>
