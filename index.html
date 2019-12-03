@@ -4,61 +4,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Old English Pronunciator</title>
-    <style>
-      html, body {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-        background-color: darkblue
-      }
-      body > * {
-        width: 100%;
-        box-sizing: border-box;
-      }
-      header {
-        text-align: center;
-        color: white;
-        font-size: 1.5em;
-        padding: 0.5em;
-      }
-      main {
-        padding: 1em;
-        background-color: #fffae4;
-      }
-      main > * {
-        display: block;
-        width: 100%;
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-      main p {
-        text-align: center;
-      }
-      main p.transition {
-        font-size: 14pt;
-        padding: 0.5em 0;
-      }
-      main textarea {
-        height: 10em;
-        font-family: 'Times New Roman', Times, serif;
-        font-size: 12pt;
-        display: block;
-      }
-      footer {
-        color: white;
-        padding: 0.5em;
-        font-size: 10pt;
-      }
-      footer .left {
-        float: left;
-      }
-      footer .right {
-        float: right;
-      }
-    </style>
+    <link rel="stylesheet" href="./styles.css" />
     <script src="./transcriber.js"></script>
+    <!-- <script src="./audio.js"></script> -->
+  </head>
+  <body>
+    <header>
+      o̞ld ɪŋlɪʃ pɹənʌnsietɹ̩
+    </header>
+    <main>
+      <div id="instructions">
+        <p>
+          You can use <code>\th</code> to represent Þ/þ, <code>\dh</code> to represent Ð/ð, and <code>\ae</code> to represent æ. Ƿ/ƿ (wynn) is treated identically to <code>w</code>.
+        </p>
+        <p>
+          Output is in <a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>.
+          Relevant source is <a href="./transcriber.js">here</a>, if you're curious.
+        </p>
+      </div>
+      <textarea id="input" placeholder="Text to transcribe" oninput="update()"></textarea>
+      <p class="transition">...is pronounced...</p>
+      <textarea id="output" disabled="disabled"></textarea>
+      <!-- <div id="speaking-controls">
+        <button onclick="audio.generate(output.value, [play, download])">Generate speech</button>
+        <button disabled="disabled" id="play" onclick="audio.play()">Play</button>
+        <button disabled="disabled" id="download" onclick="audio.download()">Download</button>
+      </div> -->
+    </main>
+    <footer>
+      <span class="left">&copy; 2019 Nic Hartley</span>
+      <span class="right">Made for RIT's ENGL370</span>
+    </footer>
     <script>
       function update() {
+        location.hash = '#' + input.value;
+      }
+      
+      window.onhashchange = () => {
+        input.value = decodeURI(location.hash.slice(1));
         let [val, success] = transcribe(input.value);
         output.value = val;
         if (success) {
@@ -66,33 +49,6 @@
         } else {
           output.style.color = 'red';
         }
-      }
-    </script>
-  </head>
-  <body>
-    <header>
-      o̞ld ɪŋlɪʃ pɹənʌnsietɹ̩
-    </header>
-    <main>
-      <p>
-        You can use <code>\th</code> to represent Þ/þ, <code>\dh</code> to represent Ð/ð, and <code>\ae</code> to represent æ. Ƿ/ƿ (wynn) is treated identically to <code>w</code>.
-      </p>
-      <p>
-        Output is in <a href="https://en.wikipedia.org/wiki/International_Phonetic_Alphabet">IPA</a>.
-        Relevant source is <a href="./transcriber.js">here</a>, if you're curious.
-      </p>
-      <textarea id="input" placeholder="Text to transcribe" oninput="update()"></textarea>
-      <p class="transition">...is pronounced...</p>
-      <textarea id="output" disabled="disabled"></textarea>
-    </main>
-    <footer>
-      <span class="left">&copy; 2019 Nic Hartley</span>
-      <span class="right">Made for RIT's ENGL370</span>
-    </footer>
-    <script>
-      window.onhashchange = () => {
-        input.value = decodeURI(location.hash.slice(1));
-        update();
       };
       window.onhashchange();
     </script>
