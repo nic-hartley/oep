@@ -39,7 +39,39 @@ function singleSub(text, pos) {
   let next = text[pos + 1];
   let prev = text[pos - 1];
   switch (current) {
-    // TODO: Vowels
+    // TODO: determine if vowel is long or short when no macron
+    case 'a':
+    case 'æ':
+      return ['æ', 1];
+    case 'ā':
+      return ['ɑː', 1];
+    case 'e':
+      if (next === 'a') return ['ɛ', 2];
+      if (next === 'o') return ['ɛ', 2];
+      if (!is.letter(next)) return ['ə', 1];
+      return ['ɛ', 1];
+    case 'ē':
+      if (next === 'ā' || next === 'a') return ['ɛə', 2];
+      if (next === 'ō' || next === 'o') return ['ɛo', 2];
+      return ['eː', 1];
+    case 'i':
+      if (next === 'e') return ['ɛ', 2];
+      return ['ɪ', 1];
+    case 'ī':
+      if (next === 'e' || next === 'ē') return ['ie', 2];
+      return ['iː', 1];
+    case 'o':
+      return ['ɔ', 1];
+    case 'ō':
+      return ['oː', 1];
+    case 'u':
+      return ['ʊ', 1];
+    case 'ū':
+      return ['uː', 1];
+    case 'y':
+      return ['ɪ', 1];
+    case 'ȳ':
+      return ['ɯ', 1];
     case 'c':
       if (next == 'g') return ['dʒ', 2];
       if (is.vowel.front(next) || is.vowel.front(prev)) return ['tʃ', 1];
